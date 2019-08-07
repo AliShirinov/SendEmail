@@ -1,0 +1,30 @@
+﻿@using SendEmailApp.Models
+@model Email
+
+@{
+    ViewData["Title"] = "Send";
+}
+
+<h1>Send</h1>
+
+
+    <form method="post" asp-controller="Email" asp-action="Send">
+        <div asp-validation-summary="ModelOnly"></div>
+        <div class="form-group">
+            <label asp-for="To"></label>
+            <input asp-for="To" class="form-control" />
+            <input hidden type="number" name="Id" value="@ViewBag.Id" />
+            <span asp-validation-for="To" class="text-danger"></span>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-info" value="Send" />
+        </div>
+        
+    </form>
+
+
+    @section Scripts{
+        <script src="~/js/jquery.validate.min.js"></script>
+        <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+
+    }

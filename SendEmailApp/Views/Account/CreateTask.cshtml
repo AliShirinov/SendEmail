@@ -1,0 +1,57 @@
+﻿@model SendEmailApp.Models.UserTask
+@{
+    ViewData["Title"] = "CreateTask";
+}
+
+<h1>CreateTask</h1>
+<form method="post">
+    <div class="form-group">
+        <label asp-for="Title">Title</label>
+        <input asp-for="Title" class="form-control" />
+        <span asp-validation-for="Title" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Description</label>
+        <input asp-for="Description" class="form-control" />
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="CreatedDate">CreatedDate</label>
+        <input type="text" name="Date" id="date" class="form-control" disabled style="background-color:#fff;" value="@DateTime.Now" />
+        <span asp-validation-for="CreatedDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="ExpireDate">ExpireDate</label>
+        <input asp-for="ExpireDate" class="form-control" />
+        <span asp-validation-for="ExpireDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <input type="submit" class="btn btn-success" value="Create"  />
+    </div>
+</form>
+
+@section Scripts{
+    <script src="~/js/jquery.validate.min.js"></script>
+    <script src="~/js/jquery.validate.unobtrusive.min.js"></script>
+    @*<script>
+        $(window).ready(function () {
+            setInterval(function () {
+                var date = new Date();
+                console.log(date.getDay());
+                var day = date.getDay();
+                if (day < 10) {
+                    day = "0" + day;
+                }
+                var month = date.getMonth();
+                if (month < 10) {
+                    month = "0" + month;
+                }
+                var year = date.getFullYear();
+                var time = date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: false }).replace("PM", "");
+                var fullCurrentTime = `${day} ${month} ${year} ${time}`
+                $('#date').val(fullCurrentTime);
+            }, 1000);
+            
+        })
+    </script>*@
+}

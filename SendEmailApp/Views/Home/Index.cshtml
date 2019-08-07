@@ -1,0 +1,65 @@
+﻿@using SendEmailApp.Models
+@model IEnumerable<UserTask>
+@{
+    Layout = null;
+}
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<div class="text-center">
+    @if (Context.User.Identity.IsAuthenticated)
+    {
+        <h1 class="display-4">Welcome @Context.User.Identity.Name</h1>
+    }
+
+</div>
+<div class="container">
+    <div class="form-group text-right">
+        <a asp-action="SignOut" asp-controller="Account" class="btn btn-info">Log Out</a>
+    </div>
+</div>
+
+<div class="container">
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th style="text-align:center;">Id</th>
+            <th style="text-align:center;">Title</th>
+            <th style="text-align:center;">Description</th>
+            <th style="text-align:center;">CreatedDate</th>
+            <th style="text-align:center;">ExpireDate</th>
+            <th style="text-align:center;">Operations</th>
+        </tr>
+        @{
+            string userId = Context.Session.GetString("userId");
+        }
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>@item.Title</td>
+                <td>@item.Description</td>
+                <td>@item.CreatedDate</td>
+                <td>@item.ExpireDate</td>
+                <td>
+                    @if (item.AppUserId == userId)
+                    {
+                        <a href="/Account/EditTask/@item.Id" class="btn btn-info">Edit</a>
+                        <a href="/Account/Delete/@item.Id" class="btn btn-danger">Delete</a>
+                    }
+                    <a href="/Email/Send/@item.Id" class="btn btn-outline-info">Share</a>
+
+                </td>
+            </tr>
+        }
+
+    </table>
+    <div>
+        <a asp-action="CreateTask" asp-controller="Account" class="btn btn-success">Create Task</a>
+    </div>
+
+</div>
+
+
